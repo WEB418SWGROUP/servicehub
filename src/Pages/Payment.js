@@ -1,65 +1,86 @@
 import { React } from "react";
-import { CardGroup, Card, Form, Row, Col, Button } from "react-bootstrap";
+import { CardGroup, Card, Form, Row, Col, Button, CardImg, Table } from "react-bootstrap";
 import Input from "../controls/Input";
-
+import Packages from "../components/Package";
+import { useParams } from "react-router-dom";
+import GetCurrentDate from "../controls/GetDate";
 
 const Payment= () => {
+
+  console.log(GetCurrentDate('-'));
+  const { id } = useParams();
+  const packagedetails = [
+    {
+        id: 1,
+        name: 'Gold',
+        price: 400,
+        image: require('../GoldIcon.png'),
+        color: '#e6ac00'
+       
+    },
+    {
+        id: 2,
+        name: 'Platinum',
+        price: 500,
+        image: require('../PlatinumIcon.png'),
+        color: '#6a6b6b'
+    },
+    {
+        id: 3,
+        name: 'Silver',
+        price: 300,
+        image: require('../SilverIcon.png'),
+        color: '#b7babc'
+
+    }
+]
+   
     return(
         <>
-        <CardGroup style={{padding:"2% 15%"}}>
+        <CardGroup style={{padding:"3% 15%"}}>
             <Card>
-                <Card.Body>
-
-                </Card.Body>
+            <Card.Img src={packagedetails[id-1].image} style={{width:"100%",height:"90%",padding:'5%'}} />
             </Card>
             <Card>
-                <Card.Body>
+                <Card.Body style={{padding:'10%'}} >
                 <Form>
+                <h1 style={{fontSize:"30px",fontFamily:"Trebuchet MS",textAlign:"center"}}><b>Payment</b></h1> 
+  <Table >
+    <tbody>
+      <tr>
+        <td>Package</td>
+        <td className="text-end"  style={{color: packagedetails[id-1].color, fontFamily:"Brush Script MT"}}><h5>{packagedetails[id-1].name}</h5></td>
+      </tr>
+      <tr>
+        <td>Price</td>
+        <td className="text-end"  style={{color: packagedetails[id-1].color}}><h5>{packagedetails[id-1].price}</h5></td>
+      </tr>
+    </tbody>
+  </Table>
+
+  <Form.Group className="mb-3" controlId="name">
+    <Form.Label>Name on Card</Form.Label>
+    <Form.Control placeholder="Name on Card" />
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="cardno">
+    <Form.Label>Card Number</Form.Label>
+    <Form.Control placeholder="1111222233334444" />
+  </Form.Group>
+
+
+
   <Row className="mb-3">
-    <Form.Group as={Col} controlId="formGridEmail">
-      <Form.Label>Email</Form.Label>
-      <Form.Control type="email" placeholder="Enter email" />
+    <Form.Group as={Col} controlId="exp">
+      <Form.Label>Expiry Date</Form.Label>
+      <Form.Control type="month" placeholder="Enter expiry date" min={GetCurrentDate('-')}/>
     </Form.Group>
 
-    <Form.Group as={Col} controlId="formGridPassword">
-      <Form.Label>Password</Form.Label>
-      <Form.Control type="password" placeholder="Password" />
+    <Form.Group as={Col} controlId="cvc">
+      <Form.Label>CVC</Form.Label>
+      <Form.Control  placeholder="cvc" />
     </Form.Group>
   </Row>
-
-  <Form.Group className="mb-3" controlId="formGridAddress1">
-    <Form.Label>Address</Form.Label>
-    <Form.Control placeholder="1234 Main St" />
-  </Form.Group>
-
-  <Form.Group className="mb-3" controlId="formGridAddress2">
-    <Form.Label>Address 2</Form.Label>
-    <Form.Control placeholder="Apartment, studio, or floor" />
-  </Form.Group>
-
-  <Row className="mb-3">
-    <Form.Group as={Col} controlId="formGridCity">
-      <Form.Label>City</Form.Label>
-      <Form.Control />
-    </Form.Group>
-
-    <Form.Group as={Col} controlId="formGridState">
-      <Form.Label>State</Form.Label>
-      <Form.Select defaultValue="Choose...">
-        <option>Choose...</option>
-        <option>...</option>
-      </Form.Select>
-    </Form.Group>
-
-    <Form.Group as={Col} controlId="formGridZip">
-      <Form.Label>Zip</Form.Label>
-      <Form.Control />
-    </Form.Group>
-  </Row>
-
-  <Form.Group className="mb-3" id="formGridCheckbox">
-    <Form.Check type="checkbox" label="Check me out" />
-  </Form.Group>
 
   <Button variant="primary" type="submit">
     Submit

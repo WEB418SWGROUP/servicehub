@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 
 import "../Style.css"
  const Packages = ({packages})=>{
+   
      return(
          <> 
          <Card style={{ width: '19rem' , height : "100%"}}>
@@ -19,9 +20,18 @@ import "../Style.css"
              <li>{packages.icon3}Calandar facilities</li>
              <li>{packages.icon4}Google map facilities</li>
          </ul>
-         <NavLink to = '/payment'> <Button variant="primary" style={{width:"100%"}}>Subscribe</Button></NavLink>
+         <NavLink to ={{ pathname: `/payment/${packages.id}`}}> <Button variant="primary" style={{width:"100%"}}>Subscribe</Button></NavLink>
          <Card.Text className="text-end">
-            <NavLink to = {{pathname: "/packages_details",userProps: {x: "This is a passed prop"},}}>See more&gt;&gt;&gt;</NavLink></Card.Text>
+            <NavLink
+            to={{ 
+                pathname: `/packages_details/${packages.id}`
+                // query: {
+                //   title: post.title, 
+                //   content: post.content,
+                //   comments: JSON.stringify(post.comments)
+                // } 
+              }}
+            >See more&gt;&gt;&gt;</NavLink></Card.Text>
           </Card.Text>
           </Card.Body>
          </Card>
